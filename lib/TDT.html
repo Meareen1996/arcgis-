@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Search widget tutorial</title>
+    <script src="http://210.76.80.49:8000/arcgis/Cesium/Cesium.js"></script>
+    <script src="http://210.76.80.49:8000/arcgis/Cesium/heatmap/heatmap.min.js"></script>
+    <script src="http://210.76.80.49:8000/arcgis/Cesium/heatmap/CesiumHeatmap.js"></script>
+    <script src="http://210.76.80.49:8000/arcgis/3.18/init.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="http://210.76.80.49:8000/arcgis/3.18/dojo/resources/dojo.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://210.76.80.49:8000/arcgis/3.18/esri/css/esri.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://210.76.80.49:8000/arcgis/3.18/esri/css/esri.css"
+    />
+    <link
+      rel="stylesheet"
+      href="http://210.76.80.49:8000/arcgis/3.18/dijit/themes/claro/claro.css"
+    />
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+      // var package_path = window.location.pathname.substring(
+      //   0,
+      //   window.location.pathname.lastIndexOf("/")
+      // );
+      // console.log(package_path);
+      // var dojoConfig = {
+      //   baseUrl: "../lib/3.25/dojo",
+      //   packages: [{ name: "lib", location: "/lib/TDTLib" }],
+      //   async: true,
+      //   locale: "zh-cn",
+      // };
+    </script>
+    <!-- <script src="https://js.arcgis.com/3.40/"></script> -->
+    <script>
+      require(["lib/TDTMapLayer", "esri/map", "dojo/domReady!"], function (
+        TDTMapLayer,
+        Map
+      ) {
+        const map = new Map("map", {
+          logo: false,
+        });
+        /**
+         * TDTMapLayer 中包含四个参数，分别为
+         * 1.mapType：该值的默认值为vec,代表矢量图层，可供选择的值有vec|img|ter，分别代表矢量、影像、地形
+         * 2.mapCoordinate：该值的默认值为w,代表投影坐标，可供选择的值有c|w分比为：地理坐标，投影坐标
+         * 3.isAnnoLayer：默认值为"",可供选择的值为""|"ano",分别代表非注记图层，注记图层
+         * 4.mapAnnotation：默认值为cva,不同注记类型的默认值分别为cva,cia,cta,代表矢量中文注记图层，不同底图的矢量注记可选项有：
+         *   vec(矢量):cva(中文)、eva(英文)、mva(蒙古文)、wva(维吾尔文)
+         *   img(影像):cia(中文)、eia(英文)、mia(蒙古文)、wia(维吾尔文)
+         *   ter(地形图):cta(中文)、eta(英文)、mta(蒙古文)、wta(维吾尔文)
+         */
+        //1.加载矢量图层（默认投影web墨卡托）
+        let verLayer = new TDTMapLayer("img", "w");
+        //2.加载矢量注记图层
+        let verAnnoLayer = new TDTMapLayer("ano");
+        //3.加载影像图层
+        // let imgLayer = new TDTMapLayer("img", "w");
+        //4.加载影像注记图层
+        let imgAnnoLayer = new TDTMapLayer("img", "w", "ano");
+        //5.当我们需要加载不同语言的注记的时候，无论是矢量、影像、还是地形，我们都需要同时传入4个参数，如：
+        let imgAnnoLayerM = new TDTMapLayer("img", "w", "ano", "cva"); //加载蒙古语矢量图层
+
+        map.addLayer(verLayer);
+        map.addLayer(verAnnoLayer);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
